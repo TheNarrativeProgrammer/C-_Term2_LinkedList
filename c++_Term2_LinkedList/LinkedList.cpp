@@ -117,6 +117,9 @@ void LinkedList::addToTail(int inData)
 	mSize++;										//increase size by 1
 }
 
+//REMOVE
+
+
 //GET - Node or Data
 Node* LinkedList::getHead()
 {
@@ -182,6 +185,8 @@ int LinkedList::GetIndexSize()
 
 }
 
+
+//PRINT
 void LinkedList::PrintAllDataInListDetailed()
 {
 	LOG_LN_EMPTY;
@@ -243,5 +248,44 @@ void LinkedList::PrintAllDataInListStanard()
 		LOG_LN(iterator->mData);
 		LOG_LN("======================================================");
 }
+
+void LinkedList::RemoveAt(const int& nIndex)
+{
+	if (mHead == nullptr) {
+		return;
+	}
+	else
+	{
+		Node* Iterator = mHead;
+
+		if (nIndex == 0)
+		{
+			mHead = mHead->mNext; //if deleting Index of Head
+			delete Iterator;
+			mSize = mSize - 1;
+		}
+		else if (nIndex < 0 || nIndex > mSize - 1) //check if user input number outisde of size range
+		{
+			return;
+		}
+		else
+		{
+			int iterationIndex = 0;
+			while (Iterator != nullptr)
+			{
+				if (iterationIndex == nIndex - 1)//nIndex will go to Simone, but we want Xwen, because we want the mNext of Xwen, which is Simone.
+				{
+					Node* NodeToDelete = Iterator->mNext; //Xwen's mNext is SImone, which is what we want to delete
+					Iterator->mNext = NodeToDelete->mNext;//Xwen's mNext becomes SImones mNext, which is Simone
+					delete NodeToDelete;
+					mSize = mSize - 1;
+					break;
+				}
+				Iterator = Iterator->mNext;
+				iterationIndex = iterationIndex + 1;
+			}
+		}
+	}
+
 
 

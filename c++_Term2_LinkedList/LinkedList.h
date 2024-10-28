@@ -38,5 +38,8 @@ public:
 	//PRINT
 	void PrintAllDataInListDetailed();
 	void PrintAllDataInListStanard();
+
+	//REMOVE
+	void RemoveAt(const int& nIndex);
 };
 
